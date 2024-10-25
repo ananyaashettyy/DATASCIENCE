@@ -1,0 +1,25 @@
+import requests
+
+def get_repository_info(username):
+    url = f"https://api.github.com/users/{username}/repos"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        repos = response.json()
+        if repos:
+            
+            first_repo = repos[0]
+            created_at = first_repo['created_at']
+            print(f"Repository '{first_repo['name']}' was created on {created_at}.")
+
+            
+            for repo in repos[:5]:
+                repo_name = repo['name']
+                language = repo.get('language', 'Not specified')
+                print(f'Repository: {repo_name}; Language: {language}')
+        else:
+            print("No repositories found for this user.")
+    else:
+        print(f"Error: Unable to fetch repositories for user '{username}'. Status code: {response.status_code}")
+
+get_repository_info('octocat')
