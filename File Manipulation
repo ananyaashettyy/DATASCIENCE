@@ -1,0 +1,35 @@
+import pandas as pd
+
+data = {
+    'name': ['john', 'emma', 'sant', 'lisa', 'tom'],
+    'age': [25, 30, 28, 32, 27],
+    'country': ['usa', 'canada', 'india', 'uk', 'australia'],
+    'salary': [5000, 6000, 7000, 8000, 6500]
+}
+
+df = pd.DataFrame(data)
+
+filtered_df = df[df['country'] == 'usa']
+print("\nFiltered DataFrame (country = 'usa'):")
+print(filtered_df)
+
+sorted_df = df.sort_values(by='salary', ascending=False)
+print("\nSorted DataFrame (by salary in descending order):")
+print(sorted_df)
+
+average_salary = df['salary'].mean()
+print("\nAverage Salary:", average_salary)
+      
+df['experience'] = [3, 6, 4, 8, 5]
+print("\nDataFrame with added experience:")
+print(df)
+
+df.loc[df['name'] == 'emma', 'salary'] = 65000
+print("\nDataFrame after updating Emma's salary:")
+print(df)
+
+df = df.drop('experience', axis=1)
+print("\nDataFrame after deleting  column:")
+print(df)
+
+
